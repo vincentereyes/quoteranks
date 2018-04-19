@@ -1,0 +1,6 @@
+<div>
+	Edit author:
+	<p *ngIf="(error)">{{ error }}</p>
+  <input #name type="" name="" placeholder="{{ author.name }}">
+  <button (click)="save(name.value)">Submit</button>
+</div>
