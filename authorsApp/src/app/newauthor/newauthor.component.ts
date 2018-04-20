@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { Activatedroute, Params, Router } from '@angular/router'
+import { Params, Router } from '@angular/router'
 
 @Component({
   selector: 'app-newauthor',
@@ -9,6 +9,7 @@ import { Activatedroute, Params, Router } from '@angular/router'
 })
 export class NewauthorComponent implements OnInit {
 	newAuthor: any;
+	error: any;
   constructor(private _httpService: HttpService,
   	private _router: Router) { }
 
@@ -19,9 +20,9 @@ export class NewauthorComponent implements OnInit {
   	this.newAuthor.name = name
   	let observable = this._httpService.addAuthor(this.newAuthor)
   	observable.subscribe(data => {
-  		if(data.message == "Error"){
-  			console.log(data.error)
-  			this.error = data.error.name.message
+  		if((data as any).message == "Error"){
+
+  			this.error = data["error"].name.message
   		}
   		else {
   			this._router.navigate([''])

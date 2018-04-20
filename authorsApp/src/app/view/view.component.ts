@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { HttpService } from '../http.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
-
-  constructor( private _route: ActivatedRoute,
-    private _router: Router
+	author: any;
+  constructor(
+    private _router: Router,
     private _httpService: HttpService
     ) { }
 
@@ -18,8 +18,8 @@ export class ViewComponent implements OnInit {
   	this.author = { _id : 0}
   	let observable = this._httpService.grabId(this._httpService.author._id);
   	observable.subscribe(data => {
-  		this.author = data.data
-  		
+  		this.author = data["data"]
+
   		this.author.quotes.sort(function(a, b){
   			return b.vote - a.vote;
   		})
@@ -29,7 +29,7 @@ export class ViewComponent implements OnInit {
   	let observable = this._httpService.delete(quote)
   	observable.subscribe(data => {
   		console.log(data)
-  		if(data.message == "Success"){
+  		if((data as any).message == "Success"){
   			this.ngOnInit()
   		}
   	})
@@ -38,7 +38,7 @@ export class ViewComponent implements OnInit {
   up(quote){
   		let observable = this._httpService.up(quote)
   		observable.subscribe(data => {
-  			if(data.message == "Success"){
+  			if((data as any).message == "Success"){
   				this.ngOnInit()
   			}
   		})
@@ -46,7 +46,7 @@ export class ViewComponent implements OnInit {
   	down(quote){
   		let observable = this._httpService.down(quote)
   		observable.subscribe(data => {
-  			if(data.message == "Success"){
+  			if((data as any).message == "Success"){
   				this.ngOnInit()
   			}
   		})

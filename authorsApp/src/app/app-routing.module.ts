@@ -12,8 +12,8 @@ const routes: Routes = [
 	{ path: '', component: AllauthorsComponent},
 	{ path: 'new', component: NewauthorComponent},
 	{ path: 'edit', component: EditauthorComponent},
-	{ path: 'quotes/:id' component: ViewComponent},
-	{ path: 'write/:id' component: NewquoteComponent}
+	{ path: 'quotes/:id', component: ViewComponent},
+	{ path: 'write/:id', component: NewquoteComponent}
 ];
 
 @NgModule({

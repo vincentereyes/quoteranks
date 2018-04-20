@@ -17,7 +17,7 @@ export class AllauthorsComponent implements OnInit {
   getAuthors(){
   	let observable = this._httpService.getAuthors();
   	observable.subscribe(data => {
-  		this.authors = data.data
+  		this.authors = data["data"]
   	})
   }
   delete(id){

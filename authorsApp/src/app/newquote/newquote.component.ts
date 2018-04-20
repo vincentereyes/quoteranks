@@ -8,9 +8,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class NewquoteComponent implements OnInit {
 	newQuote: any;
+	author: any;
 	error: any;
-  constructor(private _httpService: HttpService,
-  	private _router: Router;) { }
+  constructor(
+  	private _httpService: HttpService,
+  	private _router: Router) { }
 
   ngOnInit() {
   	this.newQuote = {quote: ""};
@@ -21,8 +23,8 @@ export class NewquoteComponent implements OnInit {
   	let observable = this._httpService.newQuote(this.newQuote);
   	observable.subscribe(data => {
   		let index = this.author.quotes.length;
-  		if (data.message == "Error") {
-  			this.error = data.error["quotes." + index + ".quote"].message;
+  		if ((data as any).message == "Error") {
+  			this.error = data["error"]["quotes." + index + ".quote"].message;
   		} else {
   			this._router.navigate(['/quotes/' + this.author._id])
   		}
